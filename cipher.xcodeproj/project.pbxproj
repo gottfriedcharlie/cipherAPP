@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4173887C2ECEAB6C0080A934 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4173887B2ECEAB6C0080A934 /* Messages.framework */; };
+		417388882ECEAB6D0080A934 /* cipherMessageExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 417388792ECEAB6C0080A934 /* cipherMessageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		417388592ECEAACE0080A934 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,13 +26,46 @@
 			remoteGlobalIDString = 4173884A2ECEAACD0080A934;
 			remoteInfo = cipher;
 		};
+		417388862ECEAB6D0080A934 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 417388432ECEAACD0080A934 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 417388782ECEAB6C0080A934;
+			remoteInfo = cipherMessageExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4173888D2ECEAB6D0080A934 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				417388882ECEAB6D0080A934 /* cipherMessageExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4173884B2ECEAACD0080A934 /* cipher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cipher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		417388582ECEAACE0080A934 /* cipherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cipherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		417388622ECEAACE0080A934 /* cipherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cipherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		417388792ECEAB6C0080A934 /* cipherMessageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = cipherMessageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4173887B2ECEAB6C0080A934 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		417388892ECEAB6D0080A934 /* Exceptions for "cipherMessageExtension" folder in "cipherMessageExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 417388782ECEAB6C0080A934 /* cipherMessageExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4173884D2ECEAACD0080A934 /* cipher */ = {
@@ -43,6 +81,14 @@
 		417388652ECEAACE0080A934 /* cipherUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = cipherUITests;
+			sourceTree = "<group>";
+		};
+		4173887D2ECEAB6C0080A934 /* cipherMessageExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				417388892ECEAB6D0080A934 /* Exceptions for "cipherMessageExtension" folder in "cipherMessageExtension" target */,
+			);
+			path = cipherMessageExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +115,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		417388762ECEAB6C0080A934 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4173887C2ECEAB6C0080A934 /* Messages.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +132,8 @@
 				4173884D2ECEAACD0080A934 /* cipher */,
 				4173885B2ECEAACE0080A934 /* cipherTests */,
 				417388652ECEAACE0080A934 /* cipherUITests */,
+				4173887D2ECEAB6C0080A934 /* cipherMessageExtension */,
+				4173887A2ECEAB6C0080A934 /* Frameworks */,
 				4173884C2ECEAACD0080A934 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +144,17 @@
 				4173884B2ECEAACD0080A934 /* cipher.app */,
 				417388582ECEAACE0080A934 /* cipherTests.xctest */,
 				417388622ECEAACE0080A934 /* cipherUITests.xctest */,
+				417388792ECEAB6C0080A934 /* cipherMessageExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4173887A2ECEAB6C0080A934 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4173887B2ECEAB6C0080A934 /* Messages.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +167,12 @@
 				417388472ECEAACD0080A934 /* Sources */,
 				417388482ECEAACD0080A934 /* Frameworks */,
 				417388492ECEAACD0080A934 /* Resources */,
+				4173888D2ECEAB6D0080A934 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				417388872ECEAB6D0080A934 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				4173884D2ECEAACD0080A934 /* cipher */,
@@ -163,6 +230,28 @@
 			productReference = 417388622ECEAACE0080A934 /* cipherUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		417388782ECEAB6C0080A934 /* cipherMessageExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4173888A2ECEAB6D0080A934 /* Build configuration list for PBXNativeTarget "cipherMessageExtension" */;
+			buildPhases = (
+				417388752ECEAB6C0080A934 /* Sources */,
+				417388762ECEAB6C0080A934 /* Frameworks */,
+				417388772ECEAB6C0080A934 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4173887D2ECEAB6C0080A934 /* cipherMessageExtension */,
+			);
+			name = cipherMessageExtension;
+			packageProductDependencies = (
+			);
+			productName = cipherMessageExtension;
+			productReference = 417388792ECEAB6C0080A934 /* cipherMessageExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +273,9 @@
 						CreatedOnToolsVersion = 26.0.1;
 						TestTargetID = 4173884A2ECEAACD0080A934;
 					};
+					417388782ECEAB6C0080A934 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 				};
 			};
 			buildConfigurationList = 417388462ECEAACD0080A934 /* Build configuration list for PBXProject "cipher" */;
@@ -203,6 +295,7 @@
 				4173884A2ECEAACD0080A934 /* cipher */,
 				417388572ECEAACE0080A934 /* cipherTests */,
 				417388612ECEAACE0080A934 /* cipherUITests */,
+				417388782ECEAB6C0080A934 /* cipherMessageExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +316,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		417388602ECEAACE0080A934 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		417388772ECEAB6C0080A934 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +353,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		417388752ECEAB6C0080A934 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +372,11 @@
 			isa = PBXTargetDependency;
 			target = 4173884A2ECEAACD0080A934 /* cipher */;
 			targetProxy = 417388632ECEAACE0080A934 /* PBXContainerItemProxy */;
+		};
+		417388872ECEAB6D0080A934 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 417388782ECEAB6C0080A934 /* cipherMessageExtension */;
+			targetProxy = 417388862ECEAB6D0080A934 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -538,6 +650,64 @@
 			};
 			name = Release;
 		};
+		4173888B2ECEAB6D0080A934 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = US89XUAS2K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = cipherMessageExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = cipherMessageExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cipherApp.cipher.cipherMessageExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4173888C2ECEAB6D0080A934 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = US89XUAS2K;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = cipherMessageExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = cipherMessageExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cipherApp.cipher.cipherMessageExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -573,6 +743,15 @@
 			buildConfigurations = (
 				417388732ECEAACE0080A934 /* Debug */,
 				417388742ECEAACE0080A934 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4173888A2ECEAB6D0080A934 /* Build configuration list for PBXNativeTarget "cipherMessageExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4173888B2ECEAB6D0080A934 /* Debug */,
+				4173888C2ECEAB6D0080A934 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
