@@ -11,6 +11,7 @@ enum sheetType: Identifiable {
     case ceasar
     case reverse
     case atbash
+    case rail
     case playfair
     case viginere
     case aes
@@ -20,7 +21,7 @@ enum sheetType: Identifiable {
 
 
 struct cipherSelectView: View {
-   
+    
     //sets as nothing select till something is seleced
     @State var sheetOpen: sheetType?
     
@@ -33,7 +34,7 @@ struct cipherSelectView: View {
             Text("Select one of the following ciphers to encode text")
                 .font(.caption)
             
-            VStack(spacing: 16){
+            VStack(spacing: 12){
                 
                 //simple
                 Button(action: {
@@ -59,6 +60,13 @@ struct cipherSelectView: View {
                 
                 //medium
                 Button(action: {
+                    sheetOpen = .rail
+                }) {
+                    Text("Rail Fence")
+                }
+                .buttonStyle(BigButtonStyle(color: .orange))
+                
+                Button(action: {
                     sheetOpen = .playfair
                 }) {
                     Text("Playfair")
@@ -78,8 +86,9 @@ struct cipherSelectView: View {
                     Text("AES-256")
                 }
                 .buttonStyle(BigButtonStyle(color: .red))
+            
             }
-            .padding(.top, 60)
+            .padding(.top, 20)
             .padding(.horizontal, 22)
             .sheet(item: $sheetOpen) { sheet in
                 switch sheet {
@@ -92,10 +101,13 @@ struct cipherSelectView: View {
                     
                 case .atbash:
                     atbashSheet()
-                
+                    
+                case .rail:
+                    railFenceSheet()
+                    
                 case .playfair:
                     playfairSheet()
-                
+                    
                 case .viginere:
                     vigenereSheet()
                     
@@ -106,12 +118,13 @@ struct cipherSelectView: View {
                 }
                 
                 
-            
+                
             }
             
             
             
         }
+        Spacer()
     }
     
 }
@@ -123,9 +136,9 @@ struct BigButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(height: 50)
+            .frame(height: 45)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 15)
+            .padding(.vertical, 13)
             .background(color.opacity(configuration.isPressed ? 0.7 : 0.95))
             .foregroundColor(.white)
             .cornerRadius(10)
