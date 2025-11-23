@@ -94,17 +94,16 @@ struct decipherView: View {
             )
         )
         
-        //add more cracker here once implmented
-        // example:
-        // let caesar = CaesarCracker.crack(ciphertext: trimmed)
-        // newResults.append(
-        //     CipherCrackResult(
-        //         name: "Caesar",
-        //         plaintext: caesar.plaintext,
-        //         details: "shift: \(caesar.shift), score: \(Int(caesar.score))",
-        //         score: caesar.score
-        //     )
-        // )
+        //ceasar cracker
+         let caesar = caesarCracker.crack(ciphertext: trimmed)
+         newResults.append(
+             CipherCrackResult(
+                 name: "Caesar",
+                 plaintext: caesar.plaintext,
+                 details: "shift: \(caesar.shift), score: \(Int(caesar.score))",
+                 score: caesar.score
+             )
+         )
         
         // sort best to worst
         results = newResults.sorted { $0.score > $1.score }

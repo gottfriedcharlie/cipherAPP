@@ -11,7 +11,7 @@ struct ceasarEncode {
     static func encrypt(shift: Int, plainText: String) -> String {
         
         //if shift over 26 it mods
-        let shift = shift % 26
+        let shift = ((shift % 26) + 26) % 26
         
         let chars = Array(plainText)
         //map is a loop which all the code in the brackets will be run on each the text chars
