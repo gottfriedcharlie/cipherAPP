@@ -12,6 +12,9 @@ struct ceasarSheet: View {
     @Environment(\.dismiss) var dismiss
     @State private var key: String = " "
     @State private var plaintext: String = " "
+    @State private var ciphertext: String = " "
+    
+    
     @State private var isCopied: Bool = false
     
     //controls ceasar sheet
@@ -33,12 +36,6 @@ struct ceasarSheet: View {
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.secondary.opacity(0.5))
                         )
-                    
-                    Button(action: {
-                        // save key to encode
-                    }) {
-                        Text("Save")
-                    }
                     Spacer()
                 }
                 
@@ -56,6 +53,13 @@ struct ceasarSheet: View {
                 
                 //this button updates to show result sheet
                 Button(action: {
+                    let shift = Int(key.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
+                    
+                    ciphertext = ceasarEncode.encrypt(shift: shift, plainText: plaintext)
+                    
+                    
+                    
+                    
                     showResultSheet = true
                 }) {
                     Text("Encrpt Text")
@@ -85,6 +89,8 @@ struct ceasarSheet: View {
                             .font(.headline)
                         
                         Button(action: {
+                            
+                            UIPasteboard.general.string = ciphertext
                             isCopied = true
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 isCopied = false
@@ -104,7 +110,7 @@ struct ceasarSheet: View {
                     
                     Spacer()
                     
-                    Text("Your encrypted text will appear here.")
+                    Text(ciphertext)
                         .foregroundColor(.gray)
                         .padding()
                     
