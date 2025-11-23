@@ -12,7 +12,7 @@ struct ContentView: View {
         TabView{
             cipherSelectView()
                 .tabItem {
-                    Label("Cipers!", systemImage: "lock")
+                    Label("Ciphers!", systemImage: "lock")
                 }
             
             decipherView()
