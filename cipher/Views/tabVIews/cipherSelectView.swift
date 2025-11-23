@@ -122,9 +122,9 @@ struct cipherSelectView: View {
             }
             
             
-            
+            Spacer()
         }
-        Spacer()
+       
     }
     
 }

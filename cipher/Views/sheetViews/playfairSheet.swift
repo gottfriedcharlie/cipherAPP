@@ -26,5 +26,5 @@ struct playfairSheet: View {
 }
 
 #Preview {
-    ceasarSheet()
+    playfairSheet()
 }

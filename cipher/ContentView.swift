@@ -11,6 +11,7 @@ struct ContentView: View {
     var body: some View {
         TabView{
             cipherSelectView()
+            //decipherView()
                 .tabItem {
                     Label("Ciphers!", systemImage: "lock")
                 }
