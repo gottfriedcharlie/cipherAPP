@@ -83,17 +83,6 @@ struct decipherView: View {
         
         var newResults: [CipherCrackResult] = []
         
-        //rail fence cracker
-        let rf = RailFenceCracker.crack(ciphertext: trimmed, minRails: 2, maxRails: 10)
-        newResults.append(
-            CipherCrackResult(
-                name: "Rail Fence",
-                plaintext: rf.plaintext,
-                details: "rails: \(rf.rails), score: \(Int(rf.score))",
-                score: rf.score
-            )
-        )
-        
         //ceasar cracker
         let caesar = caesarCracker.crack(ciphertext: trimmed)
         newResults.append(
@@ -105,7 +94,7 @@ struct decipherView: View {
             )
         )
         
-        
+        //reverse cracker
         let reverse = reverseCracker.crack(cipherText: trimmed)
         newResults.append(
             CipherCrackResult(
@@ -116,6 +105,7 @@ struct decipherView: View {
             )
         )
         
+        //at bash cracker
         let atBash = AtbashCracker.crack(cipherText: trimmed)
         newResults.append(
             CipherCrackResult(
@@ -125,6 +115,20 @@ struct decipherView: View {
                 score: atBash.score
             )
         )
+        
+        //rail fence cracker
+        let rf = RailFenceCracker.crack(ciphertext: trimmed, minRails: 2, maxRails: 10)
+        newResults.append(
+            CipherCrackResult(
+                name: "Rail Fence",
+                plaintext: rf.plaintext,
+                details: "rails: \(rf.rails), score: \(Int(rf.score))",
+                score: rf.score
+            )
+        )
+        
+        
+        
         
         // sort best to worst
         results = newResults.sorted { $0.score > $1.score }

@@ -31,6 +31,9 @@ struct reverseSheet: View {
                     )
                     .foregroundColor(Color.gray)
                     .font(.custom("HelveticaNeue", size: 13))
+                    .onChange(of: plaintext) { oldValue, newValue in
+                            plaintext = newValue
+                        }
                 
                 Button(action: {
                     

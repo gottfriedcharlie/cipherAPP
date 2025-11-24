@@ -8,20 +8,85 @@
 import SwiftUI
 
 struct railFenceSheet: View {
-    // This environment variable allows the sheet to dismiss itself
+    //This environment variable allows the sheet to dismiss itself
     @Environment(\.dismiss) var dismiss
-
+    @State private var key: String = " "
+    @State private var plaintext: String = " "
+    @State private var ciphertext: String = " "
+    
+    //controls ceasar sheet
+    @State private var showResultSheet = false
+    
     var body: some View {
-        VStack(spacing: 20) {
-            Text("railFenceSheet")
-                .font(.title)
-            
-            Button("Close") {
-                dismiss()
+        NavigationView {
+            VStack(spacing: 15) {
+                
+                Text("Enter A Rail below: ex. 3")
+                    .fontWeight(.bold)
+                
+                HStack{
+                    Spacer()
+                    TextEditor(text: $key)
+                        .frame(maxHeight: 50)
+                        .frame(maxWidth: 150)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.secondary.opacity(0.5))
+                        )
+                    Spacer()
+                }
+                
+                Text("Enter the plaintext below")
+                    .fontWeight(.bold)
+                
+                TextEditor(text: $plaintext)
+                    .frame(maxHeight: 250)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.secondary.opacity(0.5))
+                    )
+                    .foregroundColor(Color.gray)
+                    .font(.custom("HelveticaNeue", size: 13))
+                    .onChange(of: plaintext) { oldValue, newValue in
+                            plaintext = newValue
+                        }
+                
+                //this button updates to show result sheet
+                Button(action: {
+                    let rails = Int(key.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0
+                    
+                    ciphertext = railfenceEncode.encrypt(plainText: plaintext, rails: rails)
+                    
+                    
+                    
+                    
+                    showResultSheet = true
+                }) {
+                    Text("Encrpt Text")
+                }
+                .buttonStyle(.borderedProminent)
+                .font(.title2)
+                .tint(.blue)
+                
+                Spacer()
+                
             }
-            .buttonStyle(.bordered)
+            .navigationTitle(Text("Rail Fence Cipher"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Close") {
+                        dismiss()
+                    }
+                }
+            }
+            .padding()
+            // 3. Attach the sheet modifier here
+            .sheet(isPresented: $showResultSheet) {
+                // This is the content of the pop-up sheet
+                resultSheet(cipherText: ciphertext, showResultSheet: $showResultSheet)
+                    .presentationDetents([.fraction(0.85)])
+            }
         }
-        .padding()
     }
 }
 

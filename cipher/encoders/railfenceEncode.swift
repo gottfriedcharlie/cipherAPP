@@ -5,18 +5,19 @@
 //  Created by Charlie Gottfried on 11/24/25.
 //
 
-struct railFenceEndcode{
+struct railfenceEncode{
     
-    static func encrypt(cipherText: String, rails: Int) -> String{
+    static func encrypt(plainText: String, rails: Int) -> String{
         
-        guard rails > 1 else { return cipherText }
+        guard rails > 1 else { return plainText }
         
+        //creates array of empty strings 
         var railStrings = Array(repeating: "", count: rails)
         
         var currentRail = 0
         var goingDown = false
         
-        for char in cipherText{
+        for char in plainText{
             //taking the current char and putting it in its correct string
             //if at top puts it in first string, bottom last string
             railStrings[currentRail].append(char)
