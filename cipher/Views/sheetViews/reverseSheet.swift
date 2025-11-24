@@ -13,7 +13,6 @@ struct reverseSheet: View {
     @State private var plaintext = " "
     @State private var ciphertext = " "
     
-    @State private var isCopied: Bool = false
     
     @State private var showResultSheet = false
     

@@ -95,15 +95,15 @@ struct decipherView: View {
         )
         
         //ceasar cracker
-         let caesar = caesarCracker.crack(ciphertext: trimmed)
-         newResults.append(
-             CipherCrackResult(
-                 name: "Caesar",
-                 plaintext: caesar.plaintext,
-                 details: "shift: \(caesar.shift), score: \(Int(caesar.score))",
-                 score: caesar.score
-             )
-         )
+        let caesar = caesarCracker.crack(ciphertext: trimmed)
+        newResults.append(
+            CipherCrackResult(
+                name: "Caesar",
+                plaintext: caesar.plaintext,
+                details: "shift: \(caesar.shift), score: \(Int(caesar.score))",
+                score: caesar.score
+            )
+        )
         
         
         let reverse = reverseCracker.crack(cipherText: trimmed)
@@ -113,6 +113,16 @@ struct decipherView: View {
                 plaintext: reverse.plaintext,
                 details: "score: \(Int(reverse.score))",
                 score: reverse.score
+            )
+        )
+        
+        let atBash = AtbashCracker.crack(cipherText: trimmed)
+        newResults.append(
+            CipherCrackResult(
+                name: "atBash",
+                plaintext: atBash.plaintext,
+                details: "score: \(Int(atBash.score))",
+                score: atBash.score
             )
         )
         

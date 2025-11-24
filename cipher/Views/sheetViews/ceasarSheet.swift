@@ -14,9 +14,6 @@ struct ceasarSheet: View {
     @State private var plaintext: String = " "
     @State private var ciphertext: String = " "
     
-    
-    @State private var isCopied: Bool = false
-    
     //controls ceasar sheet
     @State private var showResultSheet = false
     
@@ -83,41 +80,8 @@ struct ceasarSheet: View {
             // 3. Attach the sheet modifier here
             .sheet(isPresented: $showResultSheet) {
                 // This is the content of the pop-up sheet
-                VStack(spacing: 20) {
-                    HStack {
-                        Text("Encryption Result")
-                            .font(.headline)
-                        
-                        Button(action: {
-                            
-                            UIPasteboard.general.string = ciphertext
-                            isCopied = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                isCopied = false
-                            }
-                        } ) {
-                            Label(isCopied ? "Copied!" : "Copy", systemImage: isCopied ? "checkmark" : "doc.on.doc")
-                        }
-                        .buttonStyle(.bordered)
-                        
-                        
-                        Button("Done") {
-                            showResultSheet = false
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    .padding(.top, 15)
-                    
-                    Spacer()
-                    
-                    Text(ciphertext)
-                        .foregroundColor(.gray)
-                        .padding()
-                    
-                    Spacer()
-                }
-                // Optional: Makes it a half-sheet (pop-up style)
-                .presentationDetents([.fraction(0.85)])
+                resultSheet(cipherText: ciphertext, showResultSheet: $showResultSheet)
+                    .presentationDetents([.fraction(0.85)])
             }
         }
     }
