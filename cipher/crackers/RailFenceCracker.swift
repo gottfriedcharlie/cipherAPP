@@ -24,22 +24,11 @@ struct RailFenceCracker {
         let effectiveMax = min(maxRails, ciphertext.count)
         
         //loop through all rails and see which one makes the most english looking output
-        // Inside RailFenceCracker.swift -> crack function
-
         for rails in minRails...effectiveMax {
             let decoded = decrypt(ciphertext: ciphertext, rails: rails)
+            let currentScore = englishLike.scoreEnglishLikelihood(text: decoded)
             
-            // --- NEW: CLEANING STEP ---
-            // 1. Lowercase everything
-            // 2. Remove non-letters (remove punctuation, spaces, and smart quotes)
-            let cleanText = decoded.lowercased().filter { $0.isLetter }
-            
-            // Score the CLEAN text, not the raw decoded text
-            let currentScore = englishLike.scoreEnglishLikelihood(text: cleanText)
-            
-            // Debug print to see what's happening (Crucial for debugging!)
-            print("Rails: \(rails) | Score: \(currentScore) | Preview: \(decoded.prefix(20))")
-            
+            //store this decoded text only if score is higher than last time
             if currentScore > bestResult.score {
                 bestResult = Result(rails: rails, plaintext: decoded, score: currentScore)
             }
@@ -47,7 +36,7 @@ struct RailFenceCracker {
         
         return bestResult
     }
-
+    
     //this decrypts rail fence using a known number of rails (not guessing here)
     static func decrypt(ciphertext: String, rails: Int) -> String {
         // 1 rail is basically no cipher so just return it

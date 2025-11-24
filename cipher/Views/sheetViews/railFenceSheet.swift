@@ -38,9 +38,11 @@ struct railFenceSheet: View {
                 
                 Text("Enter the plaintext below")
                     .fontWeight(.bold)
+                Text("For propper encrytion it will clean the text. Example: Rail: Fence -> railfence")
+                    .font(.caption)
                 
                 TextEditor(text: $plaintext)
-                    .frame(maxHeight: 250)
+                    .frame(maxHeight: 350)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.secondary.opacity(0.5))
