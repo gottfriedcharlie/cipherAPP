@@ -105,6 +105,17 @@ struct decipherView: View {
              )
          )
         
+        
+        let reverse = reverseCracker.crack(cipherText: trimmed)
+        newResults.append(
+            CipherCrackResult(
+                name: "Reverse",
+                plaintext: reverse.plaintext,
+                details: "score: \(Int(reverse.score))",
+                score: reverse.score
+            )
+        )
+        
         // sort best to worst
         results = newResults.sorted { $0.score > $1.score }
         
