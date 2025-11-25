@@ -11,12 +11,13 @@
 
 import Foundation
 
-struct Result {
-    let plaintext: String
-    let score: Double
-}
-
 struct playfairCracker {
+    
+    struct Result {
+        let plaintext: String
+        let score: Double
+    }
+
     
     //this function decrypts text using an EXISTING matrix (key)
     //it is simply the reverse of the encryption rules

@@ -142,6 +142,17 @@ struct decipherView: View {
         )
         
         
+        //vigenere cracker
+        
+        let vigenere = vigenereCracker.crack(ciphertext: trimmed)
+        newResults.append(
+            CipherCrackResult(
+                name: "Vigenère",
+                plaintext: vigenere.plaintext,
+                details: "key: \(vigenere.key), score: \(Int(vigenere.score))",
+                score: vigenere.score
+            )
+        )
         
         
         

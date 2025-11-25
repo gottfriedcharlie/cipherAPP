@@ -78,7 +78,7 @@ struct playfairSheet: View {
                     .tint(.blue)
                     
                     Button(action: {
-                        var playFair = playfairCracker.decrypt(cipherText: plaintext, matrix: playfairEncode.createMatrix(keyWord: key))
+                        let playFair = playfairCracker.decrypt(cipherText: plaintext, matrix: playfairEncode.createMatrix(keyWord: key))
                         plaintext = playFair.plaintext
                         decryptSheet = true
                     })
