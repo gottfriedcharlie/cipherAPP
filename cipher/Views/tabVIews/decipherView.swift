@@ -1,8 +1,8 @@
 //
-//  decipherView.swift
-//  cipher
+//  decipherView.swift
+//  cipher
 //
-//  Created by Charlie Gottfried on 11/22/25.
+//  Created by Charlie Gottfried on 11/22/25.
 //
 
 import SwiftUI
@@ -128,7 +128,6 @@ struct decipherView: View {
         )
         
         //playfair cracker
-        
         let playFair = playfairCracker.decrypt(cipherText: trimmed, matrix: playfairEncode.createMatrix(keyWord: ""))
 
         newResults.append(
@@ -143,7 +142,6 @@ struct decipherView: View {
         
         
         //vigenere cracker
-        
         let vigenere = vigenereCracker.crack(ciphertext: trimmed)
         newResults.append(
             CipherCrackResult(
@@ -178,8 +176,20 @@ struct ResultsView: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 12) {
                 if let best = results.first {
-                    Text("Best Guess: \(best.name)")
-                        .font(.headline)
+                    // Use HStack to align Text and Button
+                    HStack {
+                        Text("Best Guess: \(best.name)")
+                            .font(.headline)
+                        
+                        Spacer() // Pushes button to the right
+                        
+                        Button(action: {
+                            UIPasteboard.general.string = best.plaintext
+                        }) {
+                            Image(systemName: "doc.on.doc")
+                                .foregroundColor(.blue)
+                        }
+                    }
                     
                     if !best.details.isEmpty {
                         Text(best.details)
@@ -191,6 +201,7 @@ struct ResultsView: View {
                         Text(best.plaintext)
                             .font(.body)
                             .padding(.top, 4)
+                            .textSelection(.enabled) // allow standard selection
                     }
                     .frame(maxHeight: 200)
                 }
@@ -217,15 +228,22 @@ struct ResultsView: View {
                                 Text(result.plaintext)
                                     .font(.caption)
                                     .lineLimit(4)
+                                    .textSelection(.enabled) // allow selection here too
                             }
                             .padding(8)
                             .background(Color(.secondarySystemBackground))
                             .cornerRadius(8)
+                            // add context menu for quick copy
+                            .contextMenu {
+                                Button {
+                                    UIPasteboard.general.string = result.plaintext
+                                } label: {
+                                    Label("Copy Text", systemImage: "doc.on.doc")
+                                }
+                            }
                         }
                     }
                 }
-                
-                Spacer()
             }
             .padding()
             .navigationTitle("Results")
