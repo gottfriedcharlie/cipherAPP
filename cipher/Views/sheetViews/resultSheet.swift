@@ -9,22 +9,25 @@ import SwiftUI
 
 struct resultSheet: View {
     
-    let cipherText: String
+    let text: String
     
     @Binding var showResultSheet: Bool
     
     @State private var isCopied = false
     
+    var function: Bool
+    
     
     var body: some View {
         VStack(spacing: 20) {
             HStack {
-                Text("Encryption Result")
+                let heading = function ? "Encryption Result" : "Decryption Result"
+                Text(heading)
                     .font(.headline)
                 
                 Button(action: {
                     
-                    UIPasteboard.general.string = cipherText
+                    UIPasteboard.general.string = text
                     isCopied = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         isCopied = false
@@ -44,7 +47,7 @@ struct resultSheet: View {
             
             Spacer()
             
-            Text(cipherText)
+            Text(text)
                 .foregroundColor(.gray)
                 .padding()
             

@@ -1,8 +1,8 @@
 //
-//  playfairEncode.swift
-//  cipher
+//  playfairEncode.swift
+//  cipher
 //
-//  Created by Charlie Gottfried on 11/24/25.
+//  Created by Charlie Gottfried on 11/24/25.
 //
 
 import Foundation
@@ -11,12 +11,12 @@ struct playfairEncode {
     
     static func encrypt(plainText: String, keyWord: String) -> String {
         
-        //get rid of J because playfair doesnt like J and replaces him with I 
+        //get rid of J because playfair doesnt like J and replaces him with I
         let normalizedPlain = plainText
             .uppercased()
             .replacingOccurrences(of: "J", with: "I")
         
-        var trimmedText = Array(normalizedPlain.filter { $0.isLetter })
+        let trimmedText = Array(normalizedPlain.filter { $0.isLetter })
         var cleanedText = ""
         var plaintextCount: Int = 0
         var dividors: Int = 0
@@ -27,17 +27,30 @@ struct playfairEncode {
         
         
         //MARK: this prepares the plaintext for encoding
-        //if text is not even add X at the end
-        if trimmedText.count.isMultiple(of: 2) == false {
-            trimmedText.append("X")
-        }
-        
-        //for multiple letters add X inbetween
-        for i in 0..<trimmedText.count {
-            cleanedText.append(trimmedText[i])
+        //logic: We now check pairs as we go. If we find a double letter in the SAME pair, we add X and shift by 1.
+        var i = 0
+        while i < trimmedText.count {
+            let char = trimmedText[i]
+            cleanedText.append(char)
             
-            if i < trimmedText.count - 1 && trimmedText[i] == trimmedText[i + 1] {
+            //check if last character 
+            if i + 1 < trimmedText.count {
+                let nextChar = trimmedText[i+1]
+                
+                if char == nextChar {
+                    //Double letter in the same pair ex LL
+                    //insert X, and do NOT skip the second L yet, it becomes start of the next pair
+                    cleanedText.append("X")
+                    i += 1
+                } else {
+                    //normal append the second character
+                    cleanedText.append(nextChar)
+                    i += 2
+                }
+            } else {
+                //last character is alone, pad with X
                 cleanedText.append("X")
+                i += 1
             }
         }
         
@@ -75,7 +88,7 @@ struct playfairEncode {
     //this fucntion take the keywords and creates a 2d array with it and
     //the remaining character in the alpahabet hence why it returns a 2d array of characters
     static func createMatrix(keyWord: String) -> [[Character]] {
-        let alphabet = Array("ABCDEFGHIKLMNOPQRSTUVWXYZ")
+        let alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
         
         let input = (keyWord.uppercased() + alphabet).replacingOccurrences(of: "J", with: "I")
         

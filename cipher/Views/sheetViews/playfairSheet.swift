@@ -16,6 +16,7 @@ struct playfairSheet: View {
     
     //controls ceasar sheet
     @State private var showResultSheet = false
+    @State private var decryptSheet = false
     
     var body: some View {
         NavigationView {
@@ -27,21 +28,26 @@ struct playfairSheet: View {
                 HStack{
                     Spacer()
                     TextEditor(text: $key)
+                        .autocorrectionDisabled()
+                    //Text("KeyWord encryption is not built in, Coming soon")
                         .frame(maxHeight: 50)
                         .frame(maxWidth: 150)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.secondary.opacity(0.5))
                         )
+                        .multilineTextAlignment(.center)
+                        .minimumScaleFactor(0.3)
                     Spacer()
                 }
                 
-                Text("Enter the plaintext below")
+                Text("Enter the plaintext/ciphertext below")
                     .fontWeight(.bold)
                 Text("For propper encrytion it will clean the text. Example: Play: Fair -> playfair")
                     .font(.caption)
                 
                 TextEditor(text: $plaintext)
+                    .autocorrectionDisabled()
                     .frame(maxHeight: 350)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
@@ -53,24 +59,37 @@ struct playfairSheet: View {
                         plaintext = newValue
                     }
                 
-                //this button updates to show result sheet
-                Button(action: {
-                    let keyWord = String(key).uppercased().filter { $0.isLetter }
+                HStack {
+                    //this button updates to show result sheet
+                    Button(action: {
+                        let keyWord = String(key).uppercased().filter { $0.isLetter }
+                        
+                        ciphertext = playfairEncode.encrypt(plainText: plaintext, keyWord: keyWord)
+                        
+                        
+                        
+                        
+                        showResultSheet = true
+                    }) {
+                        Text("Encrpt Text")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .font(.title2)
+                    .tint(.blue)
                     
-                    ciphertext = playfairEncode.encrypt(plainText: plaintext, keyWord: keyWord)
-                    
-                    
-                    
-                    
-                    showResultSheet = true
-                }) {
-                    Text("Encrpt Text")
+                    Button(action: {
+                        var playFair = playfairCracker.decrypt(cipherText: plaintext, matrix: playfairEncode.createMatrix(keyWord: key))
+                        plaintext = playFair.plaintext
+                        decryptSheet = true
+                    })
+                    {
+                        Text("Decrypt Text")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .font(.title2)
+                    .tint(.blue)
                 }
-                .buttonStyle(.borderedProminent)
-                .font(.title2)
-                .tint(.blue)
-                
-                Spacer()
+                .padding()
                 
             }
             .navigationTitle(Text("Play Fair Cipher"))
@@ -85,7 +104,12 @@ struct playfairSheet: View {
             // 3. Attach the sheet modifier here
             .sheet(isPresented: $showResultSheet) {
                 // This is the content of the pop-up sheet
-                resultSheet(cipherText: ciphertext, showResultSheet: $showResultSheet)
+                resultSheet(text: ciphertext, showResultSheet: $showResultSheet, function: true)
+                    .presentationDetents([.fraction(0.85)])
+            }
+            
+            .sheet(isPresented: $decryptSheet) {
+                resultSheet(text: plaintext, showResultSheet: $decryptSheet, function: false)
                     .presentationDetents([.fraction(0.85)])
             }
         }

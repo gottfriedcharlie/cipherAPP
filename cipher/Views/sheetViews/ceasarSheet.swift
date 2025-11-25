@@ -83,9 +83,10 @@ struct ceasarSheet: View {
             // 3. Attach the sheet modifier here
             .sheet(isPresented: $showResultSheet) {
                 // This is the content of the pop-up sheet
-                resultSheet(cipherText: ciphertext, showResultSheet: $showResultSheet)
+                resultSheet(text: ciphertext, showResultSheet: $showResultSheet, function: true)
                     .presentationDetents([.fraction(0.85)])
             }
+
         }
     }
 }

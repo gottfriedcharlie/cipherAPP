@@ -127,6 +127,21 @@ struct decipherView: View {
             )
         )
         
+        //playfair cracker
+        
+        let playFair = playfairCracker.decrypt(cipherText: trimmed, matrix: playfairEncode.createMatrix(keyWord: ""))
+
+        newResults.append(
+            CipherCrackResult(
+                name: "Playfair",
+                plaintext: playFair.plaintext,
+                details: "Standard Key, score: \(Int(playFair.score))",
+                score: playFair.score
+                
+            )
+        )
+        
+        
         
         
         
