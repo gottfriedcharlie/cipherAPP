@@ -65,11 +65,34 @@
 			);
 			target = 417388782ECEAB6C0080A934 /* cipherMessageExtension */;
 		};
+		4185CC482ED67B730023218F /* Exceptions for "cipher" folder in "cipherMessageExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				crackers/AtbashCracker.swift,
+				crackers/ceasarCracker.swift,
+				crackers/englishLike.swift,
+				crackers/playfairCracker.swift,
+				crackers/RailFenceCracker.swift,
+				crackers/reverseCracker.swift,
+				crackers/vigenereCracker.swift,
+				encoders/aes256Encode.swift,
+				encoders/AtbashEncode.swift,
+				encoders/ceasarEncode.swift,
+				encoders/playfairEncode.swift,
+				encoders/railfenceEncode.swift,
+				encoders/reverseEncode.swift,
+				encoders/vigenereEncode.swift,
+			);
+			target = 417388782ECEAB6C0080A934 /* cipherMessageExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4173884D2ECEAACD0080A934 /* cipher */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4185CC482ED67B730023218F /* Exceptions for "cipher" folder in "cipherMessageExtension" target */,
+			);
 			path = cipher;
 			sourceTree = "<group>";
 		};
@@ -653,13 +676,13 @@
 		4173888B2ECEAB6D0080A934 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Messages Icon";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = US89XUAS2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = cipherMessageExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = cipherMessageExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = CipherMessage;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -682,13 +705,13 @@
 		4173888C2ECEAB6D0080A934 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "Messages Icon";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = US89XUAS2K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = cipherMessageExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = cipherMessageExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = CipherMessage;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

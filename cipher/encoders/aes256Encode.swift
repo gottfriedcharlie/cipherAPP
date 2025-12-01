@@ -67,7 +67,9 @@ struct aes256Encode {
         
         //using the c-api directly avoids the cryptokit version requirement
         //i ran into an error with pkcs5 so needed to add common crypto here
-        derivedBytes.withUnsafeMutableBytes { keyBytes in
+        //_ = to ignore the sucess/ failure of the function it will work
+        // and _ = just ignores it was getting a stupid error without it
+        _ = derivedBytes.withUnsafeMutableBytes { keyBytes in
             passwordData.withUnsafeBytes { passBytes in
                 salt.withUnsafeBytes { saltBytes in
                     CCKeyDerivationPBKDF(
@@ -88,7 +90,8 @@ struct aes256Encode {
     
     private static func generateRandomBytes(count: Int) -> Data {
         var key = Data(count: count)
-        let result = key.withUnsafeMutableBytes {
+        //let result had to remove this dumb warning
+        _ = key.withUnsafeMutableBytes {
             SecRandomCopyBytes(kSecRandomDefault, count, $0.baseAddress!)
         }
         return key

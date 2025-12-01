@@ -7,6 +7,7 @@
 
 import UIKit
 import Messages
+import SwiftUI
 
 class MessagesViewController: MSMessagesAppViewController {
     
@@ -22,6 +23,9 @@ class MessagesViewController: MSMessagesAppViewController {
         // This will happen when the extension is about to present UI.
         
         // Use this method to configure the extension and restore previously stored state.
+        
+        presentViewController(for: conversation, with: presentationStyle)
+
     }
     
     override func didResignActive(with conversation: MSConversation) {
@@ -55,6 +59,9 @@ class MessagesViewController: MSMessagesAppViewController {
         // Called before the extension transitions to a new presentation style.
     
         // Use this method to prepare for the change in presentation style.
+        
+        guard let conversation = activeConversation else { return }
+                presentViewController(for: conversation, with: presentationStyle)
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
@@ -63,4 +70,85 @@ class MessagesViewController: MSMessagesAppViewController {
         // Use this method to finalize any behaviors associated with the change in presentation style.
     }
 
+    //helper to load our swiftui view
+        private func presentViewController(for conversation: MSConversation, with style: MSMessagesAppPresentationStyle) {
+            //remove old views to prevent stacking
+            for child in children {
+                child.willMove(toParent: nil)
+                child.view.removeFromSuperview()
+                child.removeFromParent()
+            }
+            
+            //check if we are opening an existing message
+            var initialData: (String, String)? = nil
+            
+            if let message = conversation.selectedMessage,
+               let url = message.url,
+               let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+               let queryItems = components.queryItems {
+                
+                //extract data from url
+                let text = queryItems.first(where: { $0.name == "msg" })?.value ?? ""
+                let cipher = queryItems.first(where: { $0.name == "cipher" })?.value ?? ""
+                
+                if !text.isEmpty {
+                    initialData = (text, cipher)
+                }
+            }
+            
+            //create swiftui view with callback
+            let contentView = iMessageContentView(onSend: { [weak self] text, caption, cipherType in
+                self?.sendMessage(text: text, caption: caption, cipherType: cipherType)
+            }, initialData: initialData)
+            
+            let host = UIHostingController(rootView: contentView)
+            
+            //add to view hierarchy
+            addChild(host)
+            host.view.frame = view.bounds
+            host.view.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(host.view)
+            
+            NSLayoutConstraint.activate([
+                host.view.topAnchor.constraint(equalTo: view.topAnchor),
+                host.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                host.view.leftAnchor.constraint(equalTo: view.leftAnchor),
+                host.view.rightAnchor.constraint(equalTo: view.rightAnchor)
+            ])
+            
+            host.didMove(toParent: self)
+        }
+        
+        //logic to actually insert the message into the chat
+        func sendMessage(text: String, caption: String, cipherType: String) {
+            guard let conversation = activeConversation else { return }
+            
+            let layout = MSMessageTemplateLayout()
+            layout.caption = caption
+            layout.subcaption = "Tap to Decrypt"
+            
+            let message = MSMessage()
+            message.layout = layout
+            
+            //pack data into url so receiver can tap to open
+            var components = URLComponents()
+            components.scheme = "https"
+            components.host = "cipherapp"
+            components.queryItems = [
+                URLQueryItem(name: "msg", value: text),
+                URLQueryItem(name: "cipher", value: cipherType)
+            ]
+            
+            message.url = components.url
+            
+            conversation.insert(message) { error in
+                if let error = error {
+                    print("error sending: \(error)")
+                } else {
+                    //close extension after sending
+                    self.dismiss()
+                }
+            }
+        }
+    
 }
